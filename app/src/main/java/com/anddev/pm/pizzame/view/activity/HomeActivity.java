@@ -61,33 +61,34 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
             return false;
         });
 
+        loadData();
+    }
+
+    /**
+     * Checks LocationPermission and network status, then shows progress, get the zipCode and call observeData()
+     */
+    private void loadData() {
         //check location permission to get the user's current location
         if (Utils.checkLocationPermission(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                 Utils.APP_PERMISSIONS_REQUEST_LOCATION)) {
-            loadData();
-        }
-    }
 
-    /**
-     * method to show progress, get the zipCod and call observeData()
-     */
-    private void loadData() {
-        if (Utils.isNetworkConnected(this)) {
-            binding.swipeRefreshLayout.setRefreshing(true);
-            String zip = viewModel.getZipCode();
-            if (zip.isEmpty()) {
-                try {
-                    zip = Utils.getCurrentZipCode(this);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (Utils.isNetworkConnected(this)) {
+                binding.swipeRefreshLayout.setRefreshing(true);
+                String zip = viewModel.getZipCode();
+                if (zip.isEmpty()) {
+                    try {
+                        zip = Utils.getCurrentZipCode(this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                viewModel.setZipCode(zip);
+                observeData(viewModel);
+            } else {
+                binding.swipeRefreshLayout.setRefreshing(false);
+                Utils.showAlertDialog(this, getString(R.string.connect_to_internet_message));
             }
-            viewModel.setZipCode(zip);
-            observeData(viewModel);
-        } else {
-            binding.swipeRefreshLayout.setRefreshing(false);
-            Utils.showAlertDialog(this, getString(R.string.connect_to_internet_message));
         }
     }
 
@@ -133,6 +134,7 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 loadData();
             } else {
+                binding.swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(this, R.string.no_permission_message, Toast.LENGTH_SHORT).show();
             }
         }
