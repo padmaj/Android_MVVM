@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="result"
+            type="com.anddev.pm.pizzame.api.model.Result" />
+
+        <variable
+            name="viewModel"
+            type="com.anddev.pm.pizzame.viewModel.ResultsViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_list_margin"
+        android:layout_marginEnd="@dimen/item_list_margin"
+        app:cardUseCompatPadding="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_10dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{result.title}"
+                android:textAppearance="@style/TitleText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="title" />
+
+            <TextView
+                android:id="@+id/tv_address1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{result.address}"
+                android:textAppearance="@style/Text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="address1" />
+
+            <TextView
+                android:id="@+id/tv_address2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/item_address_format, result.city, result.state, viewModel.zipCode)}"
+                android:textAppearance="@style/Text"
+                app:layout_constraintTop_toBottomOf="@id/tv_address1"
+                tools:text="address2" />
+
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/item_distance_format, result.distance)}"
+                android:textAppearance="@style/DistanceText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1.2mi" />
+
+            <RatingBar
+                android:id="@+id/rb_rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/rating_bar_padding"
+                android:numStars="5"
+                app:layout_constraintTop_toBottomOf="@id/tv_address2"
+                app:rating='@{result.rating != null ? result.rating.averageRating : "0"}'
+                tools:rating="3.5" />
+
+            <TextView
+                android:id="@+id/total_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{(result.rating != null &amp;&amp; !result.rating.totalRatings.equals("0"))? String.format(@string/item_total_ratings_format, result.rating.totalRatings) : ""}'
+                android:textAppearance="@style/Text"
+                app:layout_constraintStart_toEndOf="@id/rb_rating"
+                app:layout_constraintTop_toBottomOf="@id/tv_address2"
+                tools:text="/ 15reviews" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@{result.phone}"
+                android:textAppearance="@style/PhoneText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_address2"
+                tools:text="(512) 000-0000" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

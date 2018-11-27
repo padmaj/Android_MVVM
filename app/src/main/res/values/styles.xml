@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.PizzaMe" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="PizzaMe.Splash" parent="Theme.PizzaMe">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Text" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
+
+    <style name="TitleText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DistanceText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="PhoneText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/royal_blue</item>
+    </style>
+
+    <style name="DetailTitleText" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DetailText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <style name="DetailDistanceText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
+
+    <style name="DetailMapsText" parent="DetailText">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="DetailTotalRatingsText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
+
+    <style name="ZipCodeEditText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+</resources>

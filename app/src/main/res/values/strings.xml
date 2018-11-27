@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PizzaMe</string>
+    <string name="no_permission_message">Grant location permission to get neatest pizza shops.</string>
+    <string name="results_null_message">Unable to get the data from server.</string>
+    <string name="item_distance_format">%smi</string>
+    <string name="item_total_ratings_format">/ %s ratings</string>
+    <string name="item_address_format"> %s, %s %s</string>
+    <string name="detail_distance_format">Distance: %smi</string>
+    <string name="detail_call_format">Call %s</string>
+    <string name="detail_maps_text">Open in maps</string>
+    <string name="detail_maps_uri">http://maps.google.com/maps?saddr=%s,%s&amp;daddr=%s,%s</string>
+    <string name="enter_zip_code">Enter ZipCode</string>
+    <string name="open_maps_error_message">Unable to open maps.</string>
+    <string name="open_phone_error_message">Unable to make a call.</string>
+</resources>
