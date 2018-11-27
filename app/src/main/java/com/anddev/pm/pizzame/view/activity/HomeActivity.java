@@ -73,17 +73,22 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
      * method to show progress, get the zipCod and call observeData()
      */
     private void loadData() {
-        binding.swipeRefreshLayout.setRefreshing(true);
-        String zip = viewModel.getZipCode();
-        if (zip.isEmpty()) {
-            try {
-                zip = Utils.getCurrentZipCode(this);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (Utils.isNetworkConnected(this)) {
+            binding.swipeRefreshLayout.setRefreshing(true);
+            String zip = viewModel.getZipCode();
+            if (zip.isEmpty()) {
+                try {
+                    zip = Utils.getCurrentZipCode(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            viewModel.setZipCode(zip);
+            observeData(viewModel);
+        } else {
+            binding.swipeRefreshLayout.setRefreshing(false);
+            Utils.showAlertDialog(this, getString(R.string.connect_to_internet_message));
         }
-        viewModel.setZipCode(zip);
-        observeData(viewModel);
     }
 
     /**

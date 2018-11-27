@@ -10,9 +10,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
+import android.support.v7.app.AlertDialog;
 import android.widget.RatingBar;
 
 import java.io.IOException;
@@ -102,7 +103,7 @@ public class Utils {
     }
 
     /**
-     * method to request permissions
+     * Method to request permissions
      *
      * @param context
      * @param permissions permissions to request
@@ -110,6 +111,34 @@ public class Utils {
      */
     public static void requestPermissions(Context context, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions((Activity) context, permissions, requestCode);
+    }
+
+    /**
+     * Check whether the network is active
+     *
+     * @param context
+     * @return boolean based on network availability
+     */
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager != null && connectivityManager.getActiveNetworkInfo() != null;
+
+    }
+
+    /**
+     * Method to show alert dialog for the given message
+     *
+     * @param context
+     * @param message message to show
+     */
+    public static void showAlertDialog(Context context, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(R.string.alert_dialog_title);
+        builder.setMessage(message);
+        builder.setPositiveButton(R.string.alert_dialog_button_test, null);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
 }
