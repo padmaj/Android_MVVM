@@ -4,11 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.RatingBar;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,6 +84,21 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * update progress drawable on ratingBar for api less than 21
+     *
+     * @param view ratingBar view
+     */
+    public static void updateRatingProgressDrawable(RatingBar view) {
+        LayerDrawable stars = (LayerDrawable) view.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(view.getContext(), R.color.colorPrimary),
+                PorterDuff.Mode.SRC_ATOP); // for filled stars
+        stars.getDrawable(1).setColorFilter(ContextCompat.getColor(view.getContext(), R.color.colorPrimary),
+                PorterDuff.Mode.SRC_ATOP); // for half filled stars
+        stars.getDrawable(0).setColorFilter(ContextCompat.getColor(view.getContext(), R.color.light_gray),
+                PorterDuff.Mode.SRC_ATOP); // for empty stars
     }
 
     /**

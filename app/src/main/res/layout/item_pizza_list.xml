@@ -67,13 +67,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="1.2mi" />
 
-            <RatingBar
+            <android.support.v7.widget.AppCompatRatingBar
                 android:id="@+id/rb_rating"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/rating_bar_padding"
                 android:numStars="5"
+                android:progressTint="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/tv_address2"
                 app:rating='@{result.rating != null ? result.rating.averageRating : "0"}'
                 tools:rating="3.5" />

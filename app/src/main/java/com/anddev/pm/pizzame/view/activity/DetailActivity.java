@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,6 +34,10 @@ public class DetailActivity extends AppCompatActivity {
 
         //add this activity to the lifecycle observer
         getLifecycle().addObserver(new AppObserver());
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            Utils.updateRatingProgressDrawable(binding.rbRating);
+        }
 
         Result result = getIntent().getParcelableExtra(INTENT_EXTRA_DETAIL_RESULT);
         String zipCode = getIntent().getStringExtra(INTENT_EXTRA_DETAIL_ZIPCODE);
