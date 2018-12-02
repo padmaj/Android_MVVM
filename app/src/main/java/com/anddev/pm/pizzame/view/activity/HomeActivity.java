@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -54,13 +55,14 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
         binding.etZipCode.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             hideKeyboard();
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.setZipCode(binding.etZipCode.getText().toString());
-                loadData();
+                if(!binding.etZipCode.getText().toString().equals(viewModel.getZipCode())) {
+                    viewModel.setZipCode(binding.etZipCode.getText().toString());
+                    loadData();
+                }
                 return true;
             }
             return false;
         });
-
         loadData();
     }
 
