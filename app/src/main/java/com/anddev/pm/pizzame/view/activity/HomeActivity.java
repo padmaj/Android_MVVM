@@ -81,11 +81,11 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
                 if (zip.isEmpty()) {
                     try {
                         zip = Utils.getCurrentZipCode(this);
+                        viewModel.setZipCode(zip);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                viewModel.setZipCode(zip);
                 observeData(viewModel);
             } else {
                 binding.swipeRefreshLayout.setRefreshing(false);
