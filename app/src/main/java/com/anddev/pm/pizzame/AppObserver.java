@@ -3,6 +3,7 @@ package com.anddev.pm.pizzame;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.util.Log;
 
 /**
@@ -20,5 +21,12 @@ public class AppObserver implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
         Log.d(TAG, "onPause called");
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy called");
+
+        ProcessLifecycleOwner.get().getLifecycle().removeObserver(this);
     }
 }
