@@ -84,8 +84,7 @@ public class PizzaListAdapter extends RecyclerView.Adapter<ResultViewHolder> {
 
                 }
             });
-            this.resultsList.clear();
-            this.resultsList.addAll(newResultsList);
+            this.resultsList = newResultsList;
             result.dispatchUpdatesTo(this);
         }
     }
